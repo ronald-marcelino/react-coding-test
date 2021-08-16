@@ -12,7 +12,7 @@ export const UserSearchPage: React.FC = (): JSX.Element | null => {
   const [inputValue, setInputValue] = React.useState<string>('');
   const [rawUsers, setRawUsers] = React.useState<[]>([]);
   const [filteredUsers, setFilteredUsers] = React.useState<User.Model[]>([]);
-  const resultSize: number = 5;
+  const resultSize: number = 4;
 
   const handleKeyChange = (value: string) => {
     if (value === '') {
@@ -33,9 +33,15 @@ export const UserSearchPage: React.FC = (): JSX.Element | null => {
     if (rawUsers.length > 0) {
       rawUsers.map((user: { [x: string]: any; }) => {
         if (String(user["name"]).startsWith(inputValue)) {
+          console.log('user: ', user);
+
           let newUser: User.Model = {
             id: user["id"],
-            name: user["name"]
+            name: user["name"],
+            owner: {
+              ownerId: user["owner"]["id"],
+              avatarUrl: user["owner"]["avatar_url"]
+            }
           };
 
           tempUsers.push(newUser);
@@ -63,7 +69,8 @@ export const UserSearchPage: React.FC = (): JSX.Element | null => {
           <div id='users-list'>
             {filteredUsers.slice(0, resultSize).map((user, index) => (
               <div key={index}>
-                <img alt='logo' src='https://picsum.photos/50/25' style={{ marginRight: '1vw' }}/>
+                {/* <img alt='logo' src='https://picsum.photos/50/25' style={{ marginRight: '1vw' }}/> */}
+                <img alt='logo' src={user.owner.avatarUrl} className={'img'}/>
                 <span>{user.name}</span>
               </div>
             ))}

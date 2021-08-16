@@ -2,8 +2,8 @@
     display: block;
     width: 100%;
     height: 100%;
-    margin-top: 25vh;
-    margin-left: 40vw;
+    margin-top: 15vh;
+    margin-left: 35vw;
 }
 
 #container input {
@@ -24,11 +24,20 @@
 }
 
 #users-list div {
-    display: block;
+    display: flex;
+    vertical-align: middle;
+    justify-content: flex-start;
+    align-items: center;
     clear: both;
     flex-wrap: wrap;
     width: auto;
     margin: 1vw 0;
     padding: 1vw;
     border-bottom: .1vw solid lightgray;
+}
+
+.img {
+    width: 5vw;
+    height: 5vw;
+    margin-right: 1vw;
 }
