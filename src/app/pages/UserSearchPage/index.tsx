@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-// import * as style from './style.css';
+import './style.css';
 import { SearchInput } from '../../components/SearchInput';
 import fetch from 'node-fetch';
 import { User } from '../../models';
@@ -12,10 +12,9 @@ export const UserSearchPage: React.FC = (): JSX.Element | null => {
   const [inputValue, setInputValue] = React.useState<string>('');
   const [rawUsers, setRawUsers] = React.useState<[]>([]);
   const [filteredUsers, setFilteredUsers] = React.useState<User.Model[]>([]);
+  const resultSize: number = 5;
 
   const handleKeyChange = (value: string) => {
-    console.log('inside handleKeyChange()');
-
     if (value === '') {
       setPageState(UserSearchPageState.DEFAULT);
     } else {
@@ -26,7 +25,6 @@ export const UserSearchPage: React.FC = (): JSX.Element | null => {
   };
 
   React.useEffect(() => {
-    console.log('inside useEffect()');
     console.log('inputValue: ', inputValue);
     console.log('rawUsers: ', rawUsers);
 
@@ -52,39 +50,38 @@ export const UserSearchPage: React.FC = (): JSX.Element | null => {
     setFilteredUsers(tempUsers);
   }, [inputValue]);
 
-  console.log('pageState: ', pageState);
-
   if (pageState === UserSearchPageState.READ_USERS)
   {
-    console.log('pageState = READ_USERS');
-    console.log('filteredUsers: ', filteredUsers);
-
     return (
       <React.Fragment>
-        <SearchInput
-          handleKeyChange={handleKeyChange}
-          placeHolder='Search users'
-          value={inputValue} />
-          {/* <div>
-            <span>FILTERED USERS COUNT: </span>
-            <span>{filteredUsers.length}</span>
-          </div> */}
-          <div>
-            {filteredUsers.map((user, index) => (
-              <div key={index}>{user.name}</div>
+        <div id='container'>
+          <SearchInput
+            handleKeyChange={handleKeyChange}
+            placeHolder='Search users'
+            value={inputValue}
+          />
+          <div id='users-list'>
+            {filteredUsers.slice(0, resultSize).map((user, index) => (
+              <div key={index}>
+                <img alt='logo' src='https://picsum.photos/50/25' style={{ marginRight: '1vw' }}/>
+                <span>{user.name}</span>
+              </div>
             ))}
           </div>
+        </div>
       </React.Fragment>
     );
   }
 
-  // DEFAULT
+  // Default page state
   return (
     <React.Fragment>
-      <SearchInput
-        handleKeyChange={handleKeyChange}
-        placeHolder='Search users'
-        value={inputValue} />
+      <div id='container'>
+        <SearchInput
+          handleKeyChange={handleKeyChange}
+          placeHolder='Search users...'
+          value={inputValue} />
+      </div>
     </React.Fragment>
   );
 }

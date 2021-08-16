@@ -2,4 +2,33 @@
     display: block;
     width: 100%;
     height: 100%;
+    margin-top: 25vh;
+    margin-left: 40vw;
+}
+
+#container input {
+    font-size: larger;
+    width: 20vw;
+    padding: 1vw;
+    border: 1.1vw solid #0097cf;
+    border-radius: .5vw;
+}
+
+#users-list {
+    font-size: larger;
+    width: 22vw;
+    margin: 0 1vw 0;
+    padding: 0;
+    border: .1vw solid lightgray;
+    border-radius: .5vw;
+}
+
+#users-list div {
+    display: block;
+    clear: both;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 1vw 0;
+    padding: 1vw;
+    border-bottom: .1vw solid lightgray;
 }
