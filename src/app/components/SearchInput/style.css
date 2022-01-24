@@ -1,0 +1,9 @@
+.inputWrapper {
+    margin: 1vw;
+    padding: 1vw;
+}
+
+.inputWrapper input {
+    font-size: 3vw;
+    color: black;
+}
